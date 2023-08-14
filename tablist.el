@@ -663,7 +663,7 @@ proceeds as \(BINOP N OPERAND\)."
               ;; can insert lines before the just found file,
               ;; confusing us by finding the same marked file again
               ;; and again and...
-              (setq next-position (and (search regexp)
+              (setq next-position (and (cl-search regexp)
                                        (point-marker))
                     found (not (null next-position)))
               (while next-position
@@ -674,7 +674,7 @@ proceeds as \(BINOP N OPERAND\)."
                 (goto-char next-position)
                 (forward-line 1)
                 (set-marker next-position nil)
-                (setq next-position (and (search regexp)
+                (setq next-position (and (cl-search regexp)
                                          (point-marker)))))
             (if (and distinguish-one-marked (= (length results) 1))
                 (setq results (cons t results)))
@@ -1544,7 +1544,7 @@ FILTER defaults to `tablist-current-filter'."
         (let (next-position results)
           (save-excursion
             (goto-char (point-min))
-            (setq next-position (search))
+            (setq next-position (cl-search))
             (while next-position
               (goto-char next-position)
               (if show-progress (sit-for 0))
@@ -1553,7 +1553,7 @@ FILTER defaults to `tablist-current-filter'."
               (goto-char next-position)
               (forward-line 1)
               (set-marker next-position nil)
-              (setq next-position (search)))
+              (setq next-position (cl-search)))
             (if (and distinguish-one-marked (= (length results) 1))
                 (setq results (cons t results))))))))
 
